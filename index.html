@@ -2,10 +2,403 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bienvenida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTN Trenque Lauquen - Universidad Tecnológica Nacional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #003d82 0%, #0056b3 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 61, 130, 0.8), rgba(0, 86, 179, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23003d82" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #ff5722;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #003d82;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #ff6b35;
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #003d82;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .about-section {
+            background: #f5f5f5;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: #003d82;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        footer {
+            background: #003d82;
+            color: white;
+            padding: 50px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b0b0;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la UTN</h1>
-    <h2>Prueba commit</h2>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">🎓 UTN Trenque Lauquen</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#acerca">Acerca de</a></li>
+                    <li><a href="#programas">Programas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Bienvenido a la UTN Trenque Lauquen</h1>
+            <p class="hero-subtitle">Formando profesionales tecnológicos de excelencia</p>
+            <button class="cta-button">Conoce Nuestros Programas</button>
+        </div>
+    </section>
+
+    <!-- Programas Section -->
+    <section class="section" id="programas">
+        <div class="container">
+            <h2 class="section-title">Nuestros Programas</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Ingeniería en Sistemas</h3>
+                    <p>Forma profesionales capacitados en el desarrollo de soluciones informáticas innovadoras.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Ingeniería Electromecánica</h3>
+                    <p>Especialización en sistemas electromecánicos y automatización industrial.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Tecnologías de Gestión</h3>
+                    <p>Proporciona herramientas para la administración y optimización de recursos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="acerca">
+        <div class="container">
+            <h2 class="section-title">Acerca de UTN Trenque Lauquen</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Una Institución de Excelencia</h3>
+                    <p>La Universidad Tecnológica Nacional, con su sede en Trenque Lauquen, se dedica a la formación de profesionales capacitados en tecnología e ingeniería.</p>
+                    <p>Nuestro compromiso es proporcionar educación de calidad con enfoque práctico y orientación hacia las necesidades del mercado laboral.</p>
+                    <p>Sumate a una comunidad de aprendizaje donde la innovación y la excelencia académica son nuestros pilares fundamentales.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Años de Trayectoria</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2000+</div>
+                        <div class="stat-label">Egresados</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Empleabilidad</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Empresas Asociadas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre Nosotros</h4>
+                <p>La UTN Trenque Lauquen es parte del sistema universitario argentino dedicado a formar profesionales en tecnología e ingeniería.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces Útiles</h4>
+                <a href="#">Portal de Alumnos</a>
+                <a href="#">Biblioteca Digital</a>
+                <a href="#">Bolsa de Trabajo</a>
+                <a href="#">Campus Virtual</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <a href="mailto:info@utn.edu.ar">📧 info@utn.edu.ar</a>
+                <a href="tel:+542397480000">📞 (02397) 48-0000</a>
+                <a href="#">Dirección: Ruta 5, Km 0, Trenque Lauquen</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universidad Tecnológica Nacional - Trenque Lauquen. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
